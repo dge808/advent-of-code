@@ -1,6 +1,6 @@
 import { inputArray } from './constant.js';
 
-function parseCoordinats(string) {
+export const parseCoordinats = (string) => {
     const leftIndentCoordinatesStart = string.indexOf('@') + 2;
     const leftIndentCoordinatesEnd = string.indexOf(',');
     const topIndentCoordinatesStart = leftIndentCoordinatesEnd + 1;
@@ -20,10 +20,8 @@ function parseCoordinats(string) {
         y1: +topIndent,
         y2: +topIndent + +height,
     };
-}
+};
 
-console.log(parseCoordinats('#8 @ 561,59: 11x24'));
-// console.log(inputArray.length);
 const filled = {};
 let count = 0;
 
@@ -32,9 +30,9 @@ inputArray.forEach(input => {
 
     const { x1, x2, y1, y2 } = coordinates;
 
-    for (let x = x1; x <= x2; x++) {
-        for (let y = y1; y <= y2; y++) {
-            const key = `${x}${y}`;
+    for (let x = x1; x < x2; x++) {
+        for (let y = y1; y < y2; y++) {
+            const key = `${x}:${y}`;
 
             if (filled[key]) {
                 filled[key] += 1;
@@ -52,4 +50,4 @@ Object.values(filled).forEach(value => {
     }
 });
 
-console.log('count', count);
+// console.log('count', count);
